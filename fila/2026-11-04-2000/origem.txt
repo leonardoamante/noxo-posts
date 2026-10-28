@@ -1,0 +1,4 @@
+marketing\semanas\2026-10-29\reels\2026-11-04-site-perguntas.json
+formato: reel (22.3s)
+tema: O que o site precisa responder
+trilha: 02 Foco (84 bpm)
