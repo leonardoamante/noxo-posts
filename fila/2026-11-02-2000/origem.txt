@@ -1,0 +1,4 @@
+marketing\semanas\2026-10-29\reels\2026-11-02-pedido-com-status.json
+formato: reel (22.3s)
+tema: Pedido sem status
+trilha: 06 Processo (88 bpm)
