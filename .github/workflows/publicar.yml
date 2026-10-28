@@ -1,0 +1,58 @@
+name: Publicar post
+
+on:
+  schedule:
+    # Horários de Brasília (UTC-3): 08:00, 12:00 e 18:00.
+    # O GitHub pode atrasar o disparo em alguns minutos.
+    - cron: '0 11 * * *'
+    - cron: '0 15 * * *'
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: 'Post específico (ex.: 2026-11-03-0800). Vazio = próximo vencido.'
+        required: false
+      teste:
+        description: 'Só validar, sem publicar'
+        type: boolean
+        default: false
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Publicar
+        id: publicar
+        continue-on-error: true
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
+          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
+          TESTE: ${{ inputs.teste && '--teste' || '' }}
+          SLOT: ${{ inputs.slot }}
+        run: node publicar.js $TESTE $SLOT
+
+      - name: Registrar na fila
+        run: |
+          git config user.name "noxo-publicador"
+          git config user.email "noxo-publicador@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || (git commit -m "Post publicado" && git push)
+
+      - name: Falhou
+        if: steps.publicar.outcome == 'failure'
+        run: exit 1

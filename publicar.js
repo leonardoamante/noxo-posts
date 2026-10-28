@@ -1,0 +1,165 @@
+// Publica no Instagram e no Facebook da NOXO o próximo post vencido da fila.
+//
+// Uso:
+//   node publicar.js                 -> publica o post mais antigo com horário já vencido
+//   node publicar.js <slot>          -> publica um post específico (ex.: 2026-11-03-0800)
+//   node publicar.js --teste [slot]  -> só valida (monta o post na Meta sem publicar)
+//
+// Estrutura de cada post: fila/<AAAA-MM-DD-HHMM>/ com 01.jpg, 02.jpg... e legenda.txt.
+// O horário do nome da pasta é o de Brasília. Publica no máximo um post por execução.
+//
+// Variáveis de ambiente (segredos do GitHub):
+//   META_ACCESS_TOKEN, META_PAGE_ACCESS_TOKEN, META_PAGE_ID, META_IG_USER_ID
+
+const fs = require('fs');
+const path = require('path');
+
+const GRAPH = 'https://graph.facebook.com';
+const FILA = path.join(__dirname, 'fila');
+const PUBLICADOS = path.join(__dirname, 'publicados');
+const REPO = process.env.GITHUB_REPOSITORY || 'leonardoamante/noxo-posts';
+const REF = process.env.GITHUB_SHA || 'main';
+
+const env = (nome) => {
+  const valor = process.env[nome];
+  if (!valor) throw new Error(`Variável ${nome} não definida`);
+  return valor;
+};
+
+function agoraBrasilia() {
+  const p = Object.fromEntries(
+    new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Sao_Paulo',
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+    }).formatToParts(new Date()).map((x) => [x.type, x.value])
+  );
+  return `${p.year}-${p.month}-${p.day}-${p.hour}${p.minute}`;
+}
+
+function escolherSlot(pedido) {
+  const slots = fs.existsSync(FILA)
+    ? fs.readdirSync(FILA).filter((s) => /^\d{4}-\d{2}-\d{2}-\d{4}$/.test(s)).sort()
+    : [];
+  if (pedido) {
+    if (!slots.includes(pedido)) throw new Error(`Post ${pedido} não está na fila`);
+    return pedido;
+  }
+  const agora = agoraBrasilia();
+  return slots.find((s) => s <= agora) || null;
+}
+
+async function graph(metodo, caminho, token, params = {}) {
+  const url = new URL(`${GRAPH}/${caminho}`);
+  const corpo = new URLSearchParams({ ...params, access_token: token });
+  const resp =
+    metodo === 'GET'
+      ? await fetch(`${url}?${corpo}`)
+      : await fetch(url, { method: 'POST', body: corpo });
+  const json = await resp.json();
+  if (json.error) throw new Error(`${caminho}: ${json.error.message}`);
+  return json;
+}
+
+async function aguardarContainer(id, token) {
+  for (let i = 0; i < 40; i++) {
+    const { status_code } = await graph('GET', id, token, { fields: 'status_code' });
+    if (status_code === 'FINISHED') return;
+    if (status_code === 'ERROR' || status_code === 'EXPIRED') throw new Error(`Container ${id}: ${status_code}`);
+    await new Promise((r) => setTimeout(r, 5000));
+  }
+  throw new Error(`Container ${id} não ficou pronto em 200s`);
+}
+
+async function instagram(urls, legenda, teste) {
+  const token = env('META_ACCESS_TOKEN');
+  const ig = env('META_IG_USER_ID');
+
+  let container;
+  if (urls.length === 1) {
+    container = (await graph('POST', `${ig}/media`, token, { image_url: urls[0], caption: legenda })).id;
+  } else {
+    const filhos = [];
+    for (const url of urls) {
+      filhos.push((await graph('POST', `${ig}/media`, token, { image_url: url, is_carousel_item: 'true' })).id);
+    }
+    for (const filho of filhos) await aguardarContainer(filho, token);
+    container = (await graph('POST', `${ig}/media`, token, {
+      media_type: 'CAROUSEL', children: filhos.join(','), caption: legenda,
+    })).id;
+  }
+  await aguardarContainer(container, token);
+  if (teste) return { teste: 'ok' };
+
+  const { id } = await graph('POST', `${ig}/media_publish`, token, { creation_id: container });
+  const { permalink } = await graph('GET', id, token, { fields: 'permalink' });
+  return { id, permalink };
+}
+
+async function facebook(urls, legenda, teste) {
+  const token = env('META_PAGE_ACCESS_TOKEN');
+  const pagina = env('META_PAGE_ID');
+  if (teste) {
+    await graph('GET', pagina, token, { fields: 'name' });
+    return { teste: 'ok' };
+  }
+
+  if (urls.length === 1) {
+    const { post_id } = await graph('POST', `${pagina}/photos`, token, { url: urls[0], message: legenda });
+    return { id: post_id, permalink: `https://www.facebook.com/${post_id}` };
+  }
+  const fotos = [];
+  for (const url of urls) {
+    fotos.push((await graph('POST', `${pagina}/photos`, token, { url, published: 'false' })).id);
+  }
+  const params = { message: legenda };
+  fotos.forEach((id, i) => (params[`attached_media[${i}]`] = JSON.stringify({ media_fbid: id })));
+  const { id } = await graph('POST', `${pagina}/feed`, token, params);
+  return { id, permalink: `https://www.facebook.com/${id}` };
+}
+
+async function main() {
+  const args = process.argv.slice(2);
+  const teste = args.includes('--teste');
+  const slot = escolherSlot(args.find((a) => !a.startsWith('--')));
+  if (!slot) {
+    console.log(`Nenhum post vencido na fila (agora: ${agoraBrasilia()}).`);
+    return;
+  }
+
+  const pasta = path.join(FILA, slot);
+  const imagens = fs.readdirSync(pasta).filter((f) => /\.jpe?g$/i.test(f)).sort();
+  if (imagens.length < 1 || imagens.length > 10) throw new Error(`${slot}: precisa de 1 a 10 imagens .jpg`);
+  const legenda = fs.readFileSync(path.join(pasta, 'legenda.txt'), 'utf8').trim();
+  const urls = imagens.map((f) => `https://raw.githubusercontent.com/${REPO}/${REF}/fila/${slot}/${f}`);
+
+  console.log(`${teste ? '[TESTE] ' : ''}Post ${slot}: ${imagens.length} imagem(ns)`);
+
+  // Instagram primeiro: se falhar, o post fica na fila e nada sai.
+  const resultado = { slot, publicado_em: new Date().toISOString() };
+  resultado.instagram = await instagram(urls, legenda, teste);
+  console.log('✓ Instagram', resultado.instagram.permalink || resultado.instagram.teste);
+
+  let erroFacebook = null;
+  try {
+    resultado.facebook = await facebook(urls, legenda, teste);
+    console.log('✓ Facebook', resultado.facebook.permalink || resultado.facebook.teste);
+  } catch (err) {
+    erroFacebook = err;
+    resultado.facebook = { erro: err.message };
+    console.error('✗ Facebook', err.message);
+  }
+
+  if (teste) return;
+
+  // Já saiu no Instagram: move para publicados mesmo se o Facebook falhou, para não repetir.
+  fs.writeFileSync(path.join(pasta, 'resultado.json'), JSON.stringify(resultado, null, 2) + '\n');
+  fs.mkdirSync(PUBLICADOS, { recursive: true });
+  fs.renameSync(pasta, path.join(PUBLICADOS, slot));
+  if (erroFacebook) process.exitCode = 1;
+}
+
+main().catch((err) => {
+  console.error('✗', err.message);
+  process.exit(1);
+});
