@@ -1,0 +1,4 @@
+marketing\semanas\2026-10-29\reels\2026-10-28-black-friday.json
+formato: reel (25.5s)
+tema: Black Friday começa no atendimento
+trilha: 01 Manhã clara (92 bpm)
