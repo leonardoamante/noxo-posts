@@ -7,6 +7,7 @@
 //
 // Estrutura de cada post: fila/<AAAA-MM-DD-HHMM>/ com 01.jpg, 02.jpg..., legenda.txt
 // e, opcionalmente, story.jpg (publicado nos Stories logo depois do post).
+// Pasta com reel.mp4 + legenda.txt é publicada como Reel (Instagram e Facebook).
 // O horário do nome da pasta é o de Brasília. Publica no máximo um post por execução.
 //
 // Variáveis de ambiente (segredos do GitHub):
@@ -66,14 +67,14 @@ async function graph(metodo, caminho, token, params = {}) {
   return json;
 }
 
-async function aguardarContainer(id, token) {
-  for (let i = 0; i < 40; i++) {
+async function aguardarContainer(id, token, tentativas = 40) {
+  for (let i = 0; i < tentativas; i++) {
     const { status_code } = await graph('GET', id, token, { fields: 'status_code' });
     if (status_code === 'FINISHED') return;
     if (status_code === 'ERROR' || status_code === 'EXPIRED') throw new Error(`Container ${id}: ${status_code}`);
     await new Promise((r) => setTimeout(r, 5000));
   }
-  throw new Error(`Container ${id} não ficou pronto em 200s`);
+  throw new Error(`Container ${id} não ficou pronto em ${tentativas * 5}s`);
 }
 
 async function instagram(urls, legenda, teste) {
@@ -123,6 +124,36 @@ async function facebook(urls, legenda, teste) {
   return { id, permalink: `https://www.facebook.com/${id}` };
 }
 
+async function reelInstagram([url], legenda, teste) {
+  const token = env('META_ACCESS_TOKEN');
+  const ig = env('META_IG_USER_ID');
+  // share_to_feed=false: o Reel vai para a aba Reels e não quebra a grade planejada do feed.
+  const { id: container } = await graph('POST', `${ig}/media`, token, {
+    media_type: 'REELS', video_url: url, caption: legenda, share_to_feed: 'false',
+  });
+  await aguardarContainer(container, token, 72);
+  if (teste) return { teste: 'ok' };
+  const { id } = await graph('POST', `${ig}/media_publish`, token, { creation_id: container });
+  const { permalink } = await graph('GET', id, token, { fields: 'permalink' });
+  return { id, permalink };
+}
+
+async function reelFacebook([url], legenda, teste) {
+  const token = env('META_PAGE_ACCESS_TOKEN');
+  const pagina = env('META_PAGE_ID');
+  if (teste) return { teste: 'ok' };
+  const { video_id, upload_url } = await graph('POST', `${pagina}/video_reels`, token, { upload_phase: 'start' });
+  const envio = await (await fetch(upload_url, {
+    method: 'POST',
+    headers: { Authorization: `OAuth ${token}`, file_url: url },
+  })).json();
+  if (!envio.success) throw new Error(`upload do Reel: ${JSON.stringify(envio)}`);
+  await graph('POST', `${pagina}/video_reels`, token, {
+    upload_phase: 'finish', video_id, video_state: 'PUBLISHED', description: legenda,
+  });
+  return { id: video_id, permalink: `https://www.facebook.com/reel/${video_id}` };
+}
+
 async function storyInstagram(url, teste) {
   const token = env('META_ACCESS_TOKEN');
   const ig = env('META_IG_USER_ID');
@@ -152,22 +183,32 @@ async function main() {
   }
 
   const pasta = path.join(FILA, slot);
-  const imagens = fs.readdirSync(pasta).filter((f) => /^\d+\.jpe?g$/i.test(f)).sort();
-  const temStory = fs.existsSync(path.join(pasta, 'story.jpg'));
-  if (imagens.length < 1 || imagens.length > 10) throw new Error(`${slot}: precisa de 1 a 10 imagens .jpg`);
+  const url = (f) => `https://raw.githubusercontent.com/${REPO}/${REF}/fila/${slot}/${f}`;
   const legenda = fs.readFileSync(path.join(pasta, 'legenda.txt'), 'utf8').trim();
-  const urls = imagens.map((f) => `https://raw.githubusercontent.com/${REPO}/${REF}/fila/${slot}/${f}`);
+  const ehReel = fs.existsSync(path.join(pasta, 'reel.mp4'));
+  const temStory = fs.existsSync(path.join(pasta, 'story.jpg'));
 
-  console.log(`${teste ? '[TESTE] ' : ''}Post ${slot}: ${imagens.length} imagem(ns)`);
+  let urls, publicarInstagram, publicarFacebook;
+  if (ehReel) {
+    urls = [url('reel.mp4')];
+    [publicarInstagram, publicarFacebook] = [reelInstagram, reelFacebook];
+    console.log(`${teste ? '[TESTE] ' : ''}Reel ${slot}`);
+  } else {
+    const imagens = fs.readdirSync(pasta).filter((f) => /^\d+\.jpe?g$/i.test(f)).sort();
+    if (imagens.length < 1 || imagens.length > 10) throw new Error(`${slot}: precisa de 1 a 10 imagens .jpg`);
+    urls = imagens.map(url);
+    [publicarInstagram, publicarFacebook] = [instagram, facebook];
+    console.log(`${teste ? '[TESTE] ' : ''}Post ${slot}: ${imagens.length} imagem(ns)`);
+  }
 
   // Instagram primeiro: se falhar, o post fica na fila e nada sai.
-  const resultado = { slot, publicado_em: new Date().toISOString() };
-  resultado.instagram = await instagram(urls, legenda, teste);
+  const resultado = { slot, formato: ehReel ? 'reel' : 'post', publicado_em: new Date().toISOString() };
+  resultado.instagram = await publicarInstagram(urls, legenda, teste);
   console.log('✓ Instagram', resultado.instagram.permalink || resultado.instagram.teste);
 
   let erroFacebook = null;
   try {
-    resultado.facebook = await facebook(urls, legenda, teste);
+    resultado.facebook = await publicarFacebook(urls, legenda, teste);
     console.log('✓ Facebook', resultado.facebook.permalink || resultado.facebook.teste);
   } catch (err) {
     erroFacebook = err;
@@ -196,7 +237,21 @@ async function main() {
   fs.writeFileSync(path.join(pasta, 'resultado.json'), JSON.stringify(resultado, null, 2) + '\n');
   fs.mkdirSync(PUBLICADOS, { recursive: true });
   fs.renameSync(pasta, path.join(PUBLICADOS, slot));
+  limparMidiasAntigas();
   if (erroFacebook) process.exitCode = 1;
+}
+
+// Mantém o repositório leve: apaga imagens e vídeos de publicados com mais de 7 dias
+// (o resultado.json, a legenda e a origem ficam como histórico).
+function limparMidiasAntigas() {
+  const limite = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
+  for (const slot of fs.readdirSync(PUBLICADOS)) {
+    if (!/^\d{4}-\d{2}-\d{2}-\d{4}$/.test(slot) || slot.slice(0, 10) >= limite) continue;
+    const dir = path.join(PUBLICADOS, slot);
+    for (const f of fs.readdirSync(dir)) {
+      if (/\.(jpe?g|png|mp4)$/i.test(f)) fs.unlinkSync(path.join(dir, f));
+    }
+  }
 }
 
 main().catch((err) => {
