@@ -1,0 +1,4 @@
+marketing\semanas\2026-10-29\reels\2026-11-01-tarefas-automatizar.json
+formato: reel (22.3s)
+tema: Tarefas para automatizar sem trocar de sistema
+trilha: 05 Fluxo (96 bpm)
