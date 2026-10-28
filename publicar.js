@@ -20,7 +20,7 @@ const GRAPH = 'https://graph.facebook.com';
 const FILA = path.join(__dirname, 'fila');
 const PUBLICADOS = path.join(__dirname, 'publicados');
 const REPO = process.env.GITHUB_REPOSITORY || 'leonardoamante/noxo-posts';
-const REF = process.env.GITHUB_SHA || 'main';
+const REF = process.env.REF || process.env.GITHUB_SHA || 'main';
 
 const env = (nome) => {
   const valor = process.env[nome];

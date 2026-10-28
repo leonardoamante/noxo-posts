@@ -3,10 +3,17 @@ name: Publicar post
 on:
   schedule:
     # Horários de Brasília (UTC-3): 11:50 e 17:50 (posts) e 19:50 (Reel do dia), para sair
-    # por volta de 12h, 18h e 20h. O GitHub costuma atrasar alguns minutos.
+    # por volta de 12h, 18h e 20h. O GitHub atrasa e às vezes pula disparos agendados, então
+    # cada horário tem duas reservas (+30 e +60 min). Uma reserva sem post vencido não faz nada.
     - cron: '50 14 * * *'
+    - cron: '20 15 * * *'
+    - cron: '50 15 * * *'
     - cron: '50 20 * * *'
+    - cron: '20 21 * * *'
+    - cron: '50 21 * * *'
     - cron: '50 22 * * *'
+    - cron: '20 23 * * *'
+    - cron: '50 23 * * *'
   workflow_dispatch:
     inputs:
       slot:
@@ -28,7 +35,11 @@ jobs:
   publicar:
     runs-on: ubuntu-latest
     steps:
+      # ref: main pega a fila mais recente, não a do momento do disparo. Sem isso, uma execução
+      # que esperou outra terminar ainda veria o post já publicado e o publicaria de novo.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-node@v4
         with:
@@ -44,14 +55,19 @@ jobs:
           META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
           TESTE: ${{ inputs.teste && '--teste' || '' }}
           SLOT: ${{ inputs.slot }}
-        run: node publicar.js $TESTE $SLOT
+        run: REF=$(git rev-parse HEAD) node publicar.js $TESTE $SLOT
 
+      # Se alguém enfileirou algo durante a publicação, o push simples seria recusado e o post
+      # voltaria a sair na próxima execução. O pull --rebase evita isso.
       - name: Registrar na fila
         run: |
           git config user.name "noxo-publicador"
           git config user.email "noxo-publicador@users.noreply.github.com"
           git add -A
-          git diff --cached --quiet || (git commit -m "Post publicado" && git push)
+          git diff --cached --quiet && exit 0
+          git commit -m "Post publicado"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1
 
       - name: Falhou
         if: steps.publicar.outcome == 'failure'
