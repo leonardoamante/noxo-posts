@@ -2,11 +2,10 @@ name: Publicar post
 
 on:
   schedule:
-    # Horários de Brasília (UTC-3): 08:00, 12:00 e 18:00.
-    # O GitHub pode atrasar o disparo em alguns minutos.
-    - cron: '0 11 * * *'
-    - cron: '0 15 * * *'
-    - cron: '0 21 * * *'
+    # Horários de Brasília (UTC-3): 11:50 e 17:50, para o post sair por volta de 12h e 18h.
+    # O GitHub costuma atrasar alguns minutos, e evitar a hora cheia reduz o atraso.
+    - cron: '50 14 * * *'
+    - cron: '50 20 * * *'
   workflow_dispatch:
     inputs:
       slot:
