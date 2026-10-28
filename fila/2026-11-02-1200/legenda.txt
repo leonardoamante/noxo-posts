@@ -1,0 +1,15 @@
+Mensagens de atendimento na API do WhatsApp voltaram a ser cobradas.
+
+Desde 1º de outubro de 2026, cada número comercial na WhatsApp Business Platform (API) tem 1.000 mensagens de serviço gratuitas por mês. Acima disso, a Meta cobra por mensagem. Desde novembro de 2024, essas mensagens eram gratuitas sem limite.
+
+Também mudou: mensagens de utilidade (confirmação de pedido, aviso de entrega, lembretes) enviadas dentro da janela de atendimento passaram a ser cobradas e não entram no limite gratuito.
+
+A mudança vale para quem usa a API, ou seja, robôs, plataformas de atendimento e integrações oficiais. Quem atende pelo aplicativo WhatsApp Business no celular não é afetado.
+
+Não é motivo para desligar o robô, e sim para revisar o fluxo: cortar mensagens repetidas, juntar avisos e acompanhar o consumo. Os valores por mensagem estão na página oficial de preços da Meta.
+
+Quer revisar o fluxo do seu atendimento? Fala com a NOXO pelo direct ou em contato.noxo@outlook.com.
+
+Fonte: Meta for Developers, WhatsApp Business Platform pricing.
+
+#NOXO #WhatsApp #WhatsAppBusiness #WhatsAppAPI #Atendimento #Chatbot #Automacao #PequenasEmpresas #MediasEmpresas #TecnologiaParaEmpresas
