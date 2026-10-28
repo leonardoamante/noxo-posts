@@ -26,13 +26,17 @@ const env = (nome) => {
   return valor;
 };
 
-function agoraBrasilia() {
+// O workflow dispara alguns minutos antes do horário cheio (11:50 para o post das 12:00),
+// então um post conta como vencido até 15 minutos antes do horário dele.
+const TOLERANCIA_MIN = 15;
+
+function agoraBrasilia(adiantarMin = 0) {
   const p = Object.fromEntries(
     new Intl.DateTimeFormat('en-CA', {
       timeZone: 'America/Sao_Paulo',
       year: 'numeric', month: '2-digit', day: '2-digit',
       hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
-    }).formatToParts(new Date()).map((x) => [x.type, x.value])
+    }).formatToParts(new Date(Date.now() + adiantarMin * 60000)).map((x) => [x.type, x.value])
   );
   return `${p.year}-${p.month}-${p.day}-${p.hour}${p.minute}`;
 }
@@ -45,8 +49,8 @@ function escolherSlot(pedido) {
     if (!slots.includes(pedido)) throw new Error(`Post ${pedido} não está na fila`);
     return pedido;
   }
-  const agora = agoraBrasilia();
-  return slots.find((s) => s <= agora) || null;
+  const limite = agoraBrasilia(TOLERANCIA_MIN);
+  return slots.find((s) => s <= limite) || null;
 }
 
 async function graph(metodo, caminho, token, params = {}) {
