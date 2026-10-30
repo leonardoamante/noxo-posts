@@ -1,4 +1,4 @@
-marketing\semanas\2026-10-29\reels\2026-11-01-tarefas-automatizar.json
+marketing\semanas\2026-10-29\reels\2026-10-31-onde-registrar-clientes.json
 formato: reel (22.3s)
-tema: Tarefas para automatizar sem trocar de sistema
-trilha: 05 Fluxo (96 bpm)
+tema: Onde registrar os clientes
+trilha: 04 Noite calma (76 bpm)

@@ -1,13 +1,15 @@
-Sinais de que sua empresa depende de uma pessoa só.
+Mensagens de atendimento na API do WhatsApp voltaram a ser cobradas.
 
-1. Férias e folgas viram um problema.
-2. Só uma pessoa tem as senhas e os acessos.
-3. Para achar qualquer informação, é preciso perguntar para ela.
-4. Decisão pequena espera aprovação.
-5. Os clientes só querem falar com ela.
+Desde 1º de outubro de 2026, cada número comercial na WhatsApp Business Platform (API) tem 1.000 mensagens de serviço gratuitas por mês. Acima disso, a Meta cobra por mensagem. Desde novembro de 2024, essas mensagens eram gratuitas sem limite.
 
-Ter alguém que conhece tudo é valioso. O risco é a operação parar quando essa pessoa não está. Para começar a distribuir: anotar como as tarefas principais são feitas, guardar os acessos em um lugar seguro e compartilhado, registrar o histórico de cada cliente fora da memória e definir o que outras pessoas podem decidir sozinhas.
+Também mudou: mensagens de utilidade (confirmação de pedido, aviso de entrega, lembretes) enviadas dentro da janela de atendimento passaram a ser cobradas e não entram no limite gratuito.
 
-Quantos sinais você marcou? A NOXO ajuda a mapear e registrar os processos para a empresa não parar quando alguém falta. Fala com a gente pelo direct ou em contato.noxo@outlook.com.
+A mudança vale para quem usa a API, ou seja, robôs, plataformas de atendimento e integrações oficiais. Quem atende pelo aplicativo WhatsApp Business no celular não é afetado.
 
-#NOXO #Processos #GestaoDeProcessos #GestaoEmpresarial #Organizacao #PequenasEmpresas #MediasEmpresas #EficienciaOperacional #TecnologiaParaEmpresas
+Não é motivo para desligar o robô, e sim para revisar o fluxo: cortar mensagens repetidas, juntar avisos e acompanhar o consumo. Os valores por mensagem estão na página oficial de preços da Meta.
+
+Quer revisar o fluxo do seu atendimento? Fala com a NOXO pelo direct ou em contato.noxo@outlook.com.
+
+Fonte: Meta for Developers, WhatsApp Business Platform pricing.
+
+#NOXO #WhatsApp #WhatsAppBusiness #WhatsAppAPI #Atendimento #Chatbot #Automacao #PequenasEmpresas #MediasEmpresas #TecnologiaParaEmpresas

@@ -1,9 +1,11 @@
-Automatizar um processo bagunçado só deixa a bagunça mais rápida.
+Pedido no papel → pedido com status.
 
-Se hoje cada pedido segue um caminho diferente, a automação vai repetir esse caminho confuso, só que mais vezes e com menos gente olhando. O erro que acontecia de vez em quando passa a acontecer em escala.
+Quando o pedido vive em anotações soltas, cada pergunta do cliente ("já ficou pronto?", "foi pago?", "tem previsão?") vira uma busca. A resposta depende de achar o papel certo ou a pessoa que lembra.
 
-Antes de automatizar, vale responder: qual é o passo a passo certo? Quem faz cada etapa? Onde a informação fica registrada? Com isso definido, a automação passa a trabalhar a favor.
+Com etapas simples e visíveis, como recebido, em produção e pronto, qualquer pessoa da equipe responde na hora. E, com o status registrado, o aviso ao cliente pode até sair automaticamente.
 
-Na NOXO, organizar vem antes de automatizar. Quer olhar seus processos com esse cuidado? Fala com a gente pelo direct ou em contato.noxo@outlook.com.
+Não precisa começar com sistema caro. Uma lista compartilhada com status bem definidos já muda a rotina. Na NOXO, ajudamos a montar esse controle dentro do que a empresa já usa.
 
-#NOXO #Automacao #Processos #GestaoDeProcessos #Organizacao #PequenasEmpresas #MediasEmpresas #EficienciaOperacional #TecnologiaParaEmpresas
+Quer organizar seus pedidos? Fala com a gente pelo direct ou em contato.noxo@outlook.com.
+
+#NOXO #Processos #GestaoDePedidos #Organizacao #Atendimento #Automacao #PequenasEmpresas #MediasEmpresas #EficienciaOperacional

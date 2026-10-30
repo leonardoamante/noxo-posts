@@ -1,4 +1,4 @@
-marketing\semanas\2026-10-29\reels\2026-10-30-mensagens-sem-resposta.json
-formato: reel (22.3s)
-tema: Mensagens sem resposta
-trilha: 03 Rota (100 bpm)
+marketing\semanas\2026-10-29\reels\2026-10-29-whatsapp-sistema.json
+formato: reel (24.1s)
+tema: WhatsApp não é sistema
+trilha: 02 Foco (84 bpm)

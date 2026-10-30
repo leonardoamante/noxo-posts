@@ -1,4 +1,4 @@
-marketing\semanas\2026-10-29\reels\2026-10-31-onde-registrar-clientes.json
+marketing\semanas\2026-10-29\reels\2026-10-30-mensagens-sem-resposta.json
 formato: reel (22.3s)
-tema: Onde registrar os clientes
-trilha: 04 Noite calma (76 bpm)
+tema: Mensagens sem resposta
+trilha: 03 Rota (100 bpm)
