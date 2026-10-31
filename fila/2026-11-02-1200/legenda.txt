@@ -1,15 +1,15 @@
 5 tarefas que dá para automatizar sem trocar de sistema.
 
-Muita empresa adia a automação porque imagina que vai precisar trocar tudo. Na prática, boa parte do trabalho repetitivo pode ser automatizada usando os sistemas que já estão em uso:
+Muita empresa adia a automação porque imagina que vai precisar trocar tudo. Na prática, boa parte do trabalho repetitivo roda nos sistemas que já estão em uso:
 
-1. Copiar dados de um sistema para outro, como pedidos do site para a planilha ou cadastros do formulário para o CRM.
-2. Lembrar o cliente de um pagamento, com mensagem padrão e data conhecida.
-3. Confirmar agendamentos e pedidos logo depois que chegam.
-4. Montar o relatório da semana a partir dos dados já registrados.
+1. Copiar dados de um sistema para outro.
+2. Lembrar o cliente de um pagamento.
+3. Confirmar agendamentos e pedidos.
+4. Montar o relatório da semana.
 5. Responder as perguntas de sempre, deixando o resto com uma pessoa.
 
-Antes de automatizar, confira três coisas: o passo a passo é sempre igual, os dados já estão registrados em algum lugar e alguém confere o resultado de vez em quando.
+Antes de automatizar, confira: o passo a passo é sempre igual? Os dados já estão registrados? Alguém confere o resultado de vez em quando?
 
-Quer ver por onde começar na sua empresa? Fala com a NOXO pelo direct ou em contato.noxo@outlook.com.
+Salva este checklist e manda para quem faz essas tarefas aí. Segue a @noxobr para ver mais.
 
-#NOXO #Automacao #Processos #CRM #PequenasEmpresas
+#NOXO #AutomacaoDeProcessos #TarefasRepetitivas #PequenasEmpresas
