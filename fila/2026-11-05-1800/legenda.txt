@@ -1,11 +1,13 @@
 IA não substitui o atendimento. Tira dele o que é repetitivo.
 
-Segundo pesquisa do Sebrae com o Meta Instituto de Pesquisa, 90% dos pequenos negócios que usam IA não mudaram o número de funcionários por causa dela. Na prática, a IA tem entrado para apoiar a equipe, não para tomar o lugar dela.
+Segundo pesquisa do Sebrae com o Meta Instituto de Pesquisa, 90% dos pequenos negócios que usam IA não mudaram o número de funcionários por causa dela.
 
-No atendimento, isso faz sentido: perguntas como horário, endereço e formas de pagamento podem ter resposta automática. Negociação, reclamação e pedido fora do padrão continuam com uma pessoa, que agora tem mais tempo para isso.
+No atendimento, a divisão pode ser simples:
+• Resposta automática: horário, endereço e formas de pagamento.
+• Com uma pessoa: negociação, reclamação e pedido fora do padrão.
 
-Na NOXO, aplicamos IA ao problema certo, sem tirar o lado humano de quem atende. Quer ver o que dá para tirar do repetitivo na sua empresa? Fala com a gente pelo direct ou em contato.noxo@outlook.com.
+Manda para quem acha que IA no atendimento é tudo ou nada. Quer ver o que dá para tirar do repetitivo aí? Fala com a NOXO pelo direct ou em contato.noxo@outlook.com.
 
 Fonte: Sebrae e Meta Instituto de Pesquisa, 2026.
 
-#NOXO #InteligenciaArtificial #Atendimento #Automacao #PequenasEmpresas
+#NOXO #InteligenciaArtificial #AtendimentoAoCliente #PequenasEmpresas
