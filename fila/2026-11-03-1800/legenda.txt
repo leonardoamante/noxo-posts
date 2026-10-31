@@ -1,11 +1,14 @@
-Pedido no papel → pedido com status.
+"Já ficou pronto?" "Foi pago?" "Tem previsão?"
 
-Quando o pedido vive em anotações soltas, cada pergunta do cliente ("já ficou pronto?", "foi pago?", "tem previsão?") vira uma busca. A resposta depende de achar o papel certo ou a pessoa que lembra.
+Quando o pedido vive em anotações soltas, cada pergunta do cliente vira uma busca. A resposta depende de achar o papel certo ou a pessoa que lembra.
 
-Com etapas simples e visíveis, como recebido, em produção e pronto, qualquer pessoa da equipe responde na hora. E, com o status registrado, o aviso ao cliente pode até sair automaticamente.
+Com três etapas visíveis, qualquer pessoa da equipe responde na hora:
+• Recebido
+• Em produção
+• Pronto
 
-Não precisa começar com sistema caro. Uma lista compartilhada com status bem definidos já muda a rotina. Na NOXO, ajudamos a montar esse controle dentro do que a empresa já usa.
+Não precisa começar com sistema caro. Uma lista compartilhada com status bem definidos já muda a rotina.
 
-Quer organizar seus pedidos? Fala com a gente pelo direct ou em contato.noxo@outlook.com.
+Manda para quem atende os clientes aí. Quer montar esse controle no que a empresa já usa? Fala com a NOXO pelo direct ou em contato.noxo@outlook.com.
 
-#NOXO #GestaoDePedidos #Atendimento #Automacao #PequenasEmpresas
+#NOXO #GestaoDePedidos #ControleDePedidos #PequenasEmpresas
