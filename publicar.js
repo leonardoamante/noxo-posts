@@ -43,6 +43,16 @@ function agoraBrasilia(adiantarMin = 0) {
   return `${p.year}-${p.month}-${p.day}-${p.hour}${p.minute}`;
 }
 
+// O Instagram aceita no máximo 5 hashtags por post/Reel (desde dez/2025); acima disso o post
+// pode perder distribuição ou falhar. Mantém as 5 primeiras e remove o excesso.
+const MAX_HASHTAGS = 5;
+function limitarHashtags(texto) {
+  let n = 0;
+  const limpo = texto.replace(/(^|\s)#[\p{L}\p{N}_]+/gu, (m) => (++n <= MAX_HASHTAGS ? m : ''));
+  if (n > MAX_HASHTAGS) console.warn(`⚠ Legenda com ${n} hashtags; mantidas as ${MAX_HASHTAGS} primeiras.`);
+  return limpo.replace(/[ \t]+$/gm, '').trim();
+}
+
 function escolherSlot(pedido) {
   const slots = fs.existsSync(FILA)
     ? fs.readdirSync(FILA).filter((s) => /^\d{4}-\d{2}-\d{2}-\d{4}$/.test(s)).sort()
@@ -184,7 +194,7 @@ async function main() {
 
   const pasta = path.join(FILA, slot);
   const url = (f) => `https://raw.githubusercontent.com/${REPO}/${REF}/fila/${slot}/${f}`;
-  const legenda = fs.readFileSync(path.join(pasta, 'legenda.txt'), 'utf8').trim();
+  const legenda = limitarHashtags(fs.readFileSync(path.join(pasta, 'legenda.txt'), 'utf8').trim());
   const ehReel = fs.existsSync(path.join(pasta, 'reel.mp4'));
   const temStory = fs.existsSync(path.join(pasta, 'story.jpg'));
 

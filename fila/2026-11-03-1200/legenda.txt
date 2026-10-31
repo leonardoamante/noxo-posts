@@ -12,4 +12,4 @@ Quer revisar o fluxo do seu atendimento? Fala com a NOXO pelo direct ou em conta
 
 Fonte: Meta for Developers, WhatsApp Business Platform pricing.
 
-#NOXO #WhatsApp #WhatsAppBusiness #WhatsAppAPI #Atendimento #Chatbot #Automacao #PequenasEmpresas #MediasEmpresas #TecnologiaParaEmpresas
+#NOXO #WhatsAppBusiness #WhatsAppAPI #Atendimento #PequenasEmpresas
