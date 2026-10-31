@@ -2,9 +2,10 @@ name: Publicar post
 
 on:
   schedule:
-    # Horários de Brasília (UTC-3): 11:50 e 17:50 (posts) e 19:50 (Reel do dia), para sair
-    # por volta de 12h, 18h e 20h. O GitHub atrasa e às vezes pula disparos agendados, então
-    # cada horário tem duas reservas (+30 e +60 min). Uma reserva sem post vencido não faz nada.
+    # Quem dispara na hora certa é o workflow "Relógio" (relogio.yml). Estes horários são só
+    # rede de segurança: o GitHub chega a atrasá-los 4-5 h, mas se o Relógio falhar o post sai
+    # mesmo assim, atrasado. Brasília (UTC-3): 11:50, 17:50 e 19:50, cada um com reservas de
+    # +30 e +60 min. Um disparo sem post vencido não faz nada.
     - cron: '50 14 * * *'
     - cron: '20 15 * * *'
     - cron: '50 15 * * *'

@@ -1,0 +1,68 @@
+name: Relógio
+
+# O agendamento do GitHub (schedule) chega a atrasar 4-5 h, então não serve para horário exato.
+# O Relógio é uma corrente: cada execução espera nos servidores do GitHub até o próximo horário
+# da grade (no máximo 5h30 por vez), aciona o "Publicar post" e dispara a próxima execução.
+# O cron abaixo é só o vigia: se a corrente parar, ele a religa (quando ela está viva, sai na hora).
+# Ligar pela primeira vez: Actions → Relógio → Run workflow.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */3 * * *'
+
+permissions:
+  actions: write
+
+env:
+  # Horários de Brasília em que o post deve sair (o disparo é 1 min antes).
+  HORARIOS: '12:00 18:00 20:00'
+
+jobs:
+  relogio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      # Uma corrente só: espera a execução anterior encerrar e sai se já existe outra rodando.
+      - name: Conferir se já existe outro relógio
+        id: unico
+        run: |
+          sleep 60
+          outros=$(gh api "repos/$REPO/actions/workflows/relogio.yml/runs?status=in_progress&per_page=20" \
+            --jq "[.workflow_runs[] | select(.id < ${{ github.run_id }})] | length")
+          if [ "$outros" != "0" ]; then echo "Já existe um relógio rodando. Saindo."; echo "seguir=nao" >> $GITHUB_OUTPUT; fi
+
+      - name: Esperar o próximo horário
+        id: esperar
+        if: steps.unico.outputs.seguir != 'nao'
+        run: |
+          agora=$(date +%s)
+          alvo=
+          for d in 0 1; do
+            dia=$(TZ=America/Sao_Paulo date -d "+$d day" +%F)
+            for h in $HORARIOS; do
+              t=$(( $(TZ=America/Sao_Paulo date -d "$dia $h" +%s) - 60 ))
+              if [ $t -gt $(( agora + 120 )) ]; then alvo=$t; break 2; fi
+            done
+          done
+          espera=$(( alvo - agora ))
+          max=$(( 330 * 60 ))
+          if [ $espera -gt $max ]; then
+            echo "Próximo horário: $(TZ=America/Sao_Paulo date -d @$alvo '+%d/%m %H:%M') (Brasília). Longe demais: espero 5h30 e passo adiante."
+            sleep $max
+          else
+            echo "Disparo às $(TZ=America/Sao_Paulo date -d @$alvo '+%d/%m %H:%M') (Brasília), daqui a $(( espera / 60 )) min."
+            sleep $espera
+            echo "publicar=sim" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Acionar a publicação
+        if: steps.esperar.outputs.publicar == 'sim'
+        run: gh workflow run publicar.yml --repo $REPO
+
+      - name: Passar adiante
+        if: steps.unico.outputs.seguir != 'nao'
+        run: gh workflow run relogio.yml --repo $REPO
