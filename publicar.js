@@ -53,6 +53,19 @@ function limitarHashtags(texto) {
   return limpo.replace(/[ \t]+$/gm, '').trim();
 }
 
+// Nenhum post sai sem auditoria aprovada (skill crescimento-instagram, modo 1): nota ponderada de
+// no mínimo 8 e registrada para esta legenda. Qualquer falha interrompe a publicação.
+const PESOS_AUDITORIA = { hashtags: 15, gancho: 20, dm: 20, salvamento: 10, cta: 10, formato: 15, legenda: 5, criativo: 5 };
+function exigirAuditoria(pasta, legenda) {
+  const arquivo = path.join(pasta, 'auditoria.json');
+  if (!fs.existsSync(arquivo)) throw new Error(`Post sem auditoria: falta ${arquivo}`);
+  const { notas, legenda_sha256: hash } = JSON.parse(fs.readFileSync(arquivo, 'utf8'));
+  const nota = Object.entries(PESOS_AUDITORIA).reduce((soma, [c, peso]) => soma + (notas[c] ?? 0) * peso, 0) / 100;
+  if (nota < 8) throw new Error(`Auditoria reprovada: nota ${nota} (mínimo 8)`);
+  const atual = require('crypto').createHash('sha256').update(legenda.replace(/\r\n/g, '\n').trim(), 'utf8').digest('hex');
+  if (atual !== hash) throw new Error('A legenda mudou depois da auditoria: audite de novo.');
+}
+
 function escolherSlot(pedido) {
   const slots = fs.existsSync(FILA)
     ? fs.readdirSync(FILA).filter((s) => /^\d{4}-\d{2}-\d{2}-\d{4}$/.test(s)).sort()
@@ -194,7 +207,9 @@ async function main() {
 
   const pasta = path.join(FILA, slot);
   const url = (f) => `https://raw.githubusercontent.com/${REPO}/${REF}/fila/${slot}/${f}`;
-  const legenda = limitarHashtags(fs.readFileSync(path.join(pasta, 'legenda.txt'), 'utf8').trim());
+  const legendaOriginal = fs.readFileSync(path.join(pasta, 'legenda.txt'), 'utf8').trim();
+  exigirAuditoria(pasta, legendaOriginal);
+  const legenda = limitarHashtags(legendaOriginal);
   const ehReel = fs.existsSync(path.join(pasta, 'reel.mp4'));
   const temStory = fs.existsSync(path.join(pasta, 'story.jpg'));
 
