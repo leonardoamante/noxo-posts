@@ -1,4 +1,4 @@
-Mensagens de atendimento na API do WhatsApp voltaram a ser cobradas.
+Seu robô de atendimento no WhatsApp pode ter começado a gerar conta todo mês.
 
 Desde 1º de outubro de 2026, cada número comercial na WhatsApp Business Platform (API) tem 1.000 mensagens de serviço gratuitas por mês. Acima disso, a Meta cobra por mensagem.
 

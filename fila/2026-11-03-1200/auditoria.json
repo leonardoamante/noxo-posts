@@ -1,16 +1,17 @@
 {
-  "data": "2026-10-31",
+  "data": "2026-11-03",
   "skill": "crescimento-instagram/modo-1",
+  "regua": "v3",
   "notas": {
-    "hashtags": 10,
-    "gancho": 9,
-    "dm": 8,
+    "hashtags": 9,
+    "gancho": 8,
+    "dm": 9,
     "salvamento": 7,
-    "cta": 9,
-    "formato": 8,
-    "legenda": 7,
-    "criativo": 9
+    "cta": 8,
+    "formato": 7,
+    "legenda": 9,
+    "criativo": 8
   },
-  "nota": 8.5,
-  "legenda_sha256": "6405f5770a7c5c0d9f311581d045e448c0a2d7aa7cec0c8e6f9ff85d444be46c"
+  "nota": 8.15,
+  "legenda_sha256": "8baaa5e94f0efef88641e08ac3f701ffab7483074ee39c079394dfbfa8e4dede"
 }
