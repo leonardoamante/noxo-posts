@@ -55,7 +55,7 @@ function limitarHashtags(texto) {
 
 // Nenhum post sai sem auditoria aprovada (skill crescimento-instagram, modo 1): nota ponderada de
 // no mínimo 8 e registrada para esta legenda. Qualquer falha interrompe a publicação.
-const PESOS_AUDITORIA = { hashtags: 15, gancho: 20, dm: 20, salvamento: 10, cta: 10, formato: 15, legenda: 5, criativo: 5 };
+const PESOS_AUDITORIA = { hashtags: 5, gancho: 20, dm: 25, salvamento: 10, cta: 10, formato: 20, legenda: 5, criativo: 5 };
 function exigirAuditoria(pasta, legenda) {
   const arquivo = path.join(pasta, 'auditoria.json');
   if (!fs.existsSync(arquivo)) throw new Error(`Post sem auditoria: falta ${arquivo}`);
