@@ -1,0 +1,11 @@
+Quanto da sua segunda-feira vai para montar o mesmo relatório?
+
+Exportar do sistema, exportar do banco, colar na planilha e conferir linha por linha. Toda semana igual, e um erro de digitação muda o resultado.
+
+Quando os sistemas conversam entre si, o relatório se monta sozinho e chega pronto no início da semana.
+
+Manda para quem monta o relatório aí. Segue a @noxobr para mais automações do dia a dia.
+
+Cenário ilustrativo.
+
+#RelatorioAutomatico #IntegracaoDeSistemas #Automacao #PequenasEmpresas #NOXO

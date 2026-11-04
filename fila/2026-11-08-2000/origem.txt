@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-06\reels\2026-11-08-relatorio-sozinho.json
+formato: reel (25.7s)
+tema: O relatório da semana que se monta sozinho
+trilha: 06 Processo (88 bpm)
+estilo: painel (narrado)

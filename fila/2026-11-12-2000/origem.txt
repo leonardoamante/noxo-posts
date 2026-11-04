@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-06\reels\2026-11-12-como-a-noxo-comeca.json
+formato: reel (25.1s)
+tema: Como a NOXO começa um projeto
+trilha: 04 Noite calma (76 bpm)
+estilo: painel (narrado)

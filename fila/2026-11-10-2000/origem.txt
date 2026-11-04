@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-06\reels\2026-11-10-funil-quatro-etapas.json
+formato: reel (22.5s)
+tema: Funil simples: onde está cada cliente
+trilha: 02 Foco (84 bpm)
+estilo: painel (narrado)

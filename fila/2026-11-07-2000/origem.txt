@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-06\reels\2026-11-07-reuniao-sem-tarefa.json
+formato: reel (25.5s)
+tema: Reunião que não vira tarefa
+trilha: 05 Fluxo (96 bpm)
+estilo: conversa

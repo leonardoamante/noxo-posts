@@ -1,0 +1,13 @@
+Documentar um processo não precisa virar um manual que ninguém lê. Uma página resolve, se tiver 5 coisas:
+
+1. Nome e começo: "o processo de orçamento começa quando o cliente pede um preço"
+2. Passos com verbo, no máximo 7: receber, conferir, montar, enviar
+3. Quem faz cada passo (um nome ou uma função, nunca "todo mundo")
+4. Onde cada informação fica registrada
+5. Quando termina e o que fazer no problema mais comum
+
+Teste final: alguém novo na equipe consegue seguir a página sem te perguntar nada?
+
+Salva o modelo e manda para quem vai escrever o primeiro processo com você. Segue a @noxobr para mais formas de organizar a operação.
+
+#GestaoDeProcessos #ProcessosEmpresariais #Organizacao #PequenasEmpresas #NOXO

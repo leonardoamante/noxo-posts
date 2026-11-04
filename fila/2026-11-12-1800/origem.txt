@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-06\reels\2026-11-12-pedido-por-audio.json
+formato: reel (24.6s)
+tema: Pedido por áudio que ninguém lembra
+trilha: 01 Manhã clara (92 bpm)
+estilo: conversa

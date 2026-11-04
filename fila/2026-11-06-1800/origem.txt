@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-06\reels\2026-11-06-planilha-desatualizada.json
+formato: reel (26.9s)
+tema: A planilha de clientes que ninguém atualiza
+trilha: 01 Manhã clara (92 bpm)
+estilo: painel (narrado)

@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-06\reels\2026-11-09-pedido-picado.json
+formato: reel (26.9s)
+tema: Pedido em cinco mensagens picadas
+trilha: 01 Manhã clara (92 bpm)
+estilo: conversa
