@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-06\reels\2026-11-11-atendimento-madrugada.json
+formato: reel (25.9s)
+tema: Respondendo cliente de madrugada
+trilha: 03 Rota (100 bpm)
+estilo: guia (narrado)
