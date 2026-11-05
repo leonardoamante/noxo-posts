@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-06\reels\2026-11-06-cliente-faltou.json
+formato: reel (20.6s)
+tema: Cliente que falta sem avisar: lembrete automático
+trilha: 04 Noite calma (76 bpm)
+estilo: guia (narrado)
