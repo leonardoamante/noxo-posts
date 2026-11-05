@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-06\reels\2026-11-09-black-friday-preparada.json
+formato: reel (24.6s)
+tema: A loja que se preparou para a Black Friday
+trilha: 04 Noite calma (76 bpm)
+estilo: guia (narrado)
