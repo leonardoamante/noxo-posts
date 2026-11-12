@@ -1,0 +1,6 @@
+marketing\semanas\2026-11-13\reels\2026-11-13-openai-perfis.json
+formato: reel (32.8s)
+tema: OpenAI abre perfis de empresa no ChatGPT
+trilha: 05 Fluxo (96 bpm)
+estilo: cine (narrado)
+conteudo: noticia (OpenAI, 2026-11-10)
