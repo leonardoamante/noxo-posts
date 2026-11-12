@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-13\reels\2026-11-19-quem-marcou-essa-reuniao.json
+formato: reel (22.4s)
+tema: Agenda compartilhada: quem marcou essa reunião?
+trilha: 05 Fluxo (96 bpm)
+estilo: cine (narrado)
