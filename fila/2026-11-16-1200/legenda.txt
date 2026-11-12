@@ -1,0 +1,16 @@
+Marcar um horário não deveria levar 9 mensagens.
+
+"Tem horário?" "Qual dia?" "Quinta de manhã." "Só à tarde." "E sexta?" Quem agenda pelo WhatsApp conhece essa ida e volta.
+
+Com um link de agendamento, o cliente vê os horários livres, escolhe e recebe a confirmação. Uma mensagem.
+
+O que muda na prática:
+- funciona fora do horário comercial
+- o horário vai direto para a agenda
+- o lembrete sai sozinho
+
+Quando o link não basta: serviço que precisa de orçamento ou visita antes continua pedindo conversa.
+
+Salva para comparar com a sua agenda e manda para quem marca os horários aí. Segue a @noxobr para mais formas de simplificar a rotina.
+
+#AgendamentoOnline #Automacao #AtendimentoNoWhatsApp #PequenosNegocios #NOXO
