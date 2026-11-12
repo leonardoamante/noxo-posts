@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-13\reels\2026-11-15-segunda-via-boleto.json
+formato: reel (19.5s)
+tema: Segunda via do boleto pela quinta vez
+trilha: 04 Noite calma (76 bpm)
+estilo: cine (narrado)

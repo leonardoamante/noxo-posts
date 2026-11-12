@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-13\reels\2026-11-17-me-chama-semana-que-vem.json
+formato: reel (19.4s)
+tema: Me chama semana que vem. E ninguém chamou
+trilha: 03 Rota (100 bpm)
+estilo: cine (narrado)

@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-13\reels\2026-11-18-link-falso-no-nome-da-loja.json
+formato: reel (21.9s)
+tema: O cliente recebeu um link falso no nome da sua loja
+trilha: 01 Manhã clara (92 bpm)
+estilo: cine (narrado)

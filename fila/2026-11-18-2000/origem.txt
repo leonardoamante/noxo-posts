@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-13\reels\2026-11-18-celular-da-empresa-quebrou.json
+formato: reel (21.5s)
+tema: O dia em que o celular da empresa quebrou
+trilha: 04 Noite calma (76 bpm)
+estilo: cine (narrado)

@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-13\reels\2026-11-15-avaliacao-sem-resposta.json
+formato: reel (19.5s)
+tema: A avaliação no Google que ficou sem resposta
+trilha: 01 Manhã clara (92 bpm)
+estilo: cine (narrado)

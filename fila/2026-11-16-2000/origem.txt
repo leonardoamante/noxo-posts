@@ -1,0 +1,5 @@
+marketing\semanas\2026-11-13\reels\2026-11-16-estoque-na-cabeca.json
+formato: reel (21s)
+tema: O estoque que só existe na cabeça do dono
+trilha: 02 Foco (84 bpm)
+estilo: cine (narrado)
