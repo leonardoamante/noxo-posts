@@ -1,0 +1,6 @@
+marketing\semanas\2026-11-13\reels\2026-11-14-claude-fable.json
+formato: reel (29.8s)
+tema: Anthropic lança o Claude Fable 5.2
+trilha: 06 Processo (88 bpm)
+estilo: cine (narrado)
+conteudo: noticia (Anthropic, 2026-11-09)

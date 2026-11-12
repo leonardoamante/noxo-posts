@@ -1,0 +1,15 @@
+A Anthropic lançou o Claude Fable 5.2. O que isso muda numa empresa pequena, sem exagero:
+
+O que é: um novo modelo de IA que a empresa descreve como o mais capaz dela para trabalho técnico, como programação, finanças e ciências.
+
+Onde ajuda no dia a dia: montar uma planilha ou uma automação simples, ler documentos e prints, organizar um processo.
+
+Os limites: está disponível nos planos pagos (Pro, Max, Ultra, Team e Enterprise). Para a maior parte do trabalho do dia a dia, a própria Anthropic recomenda começar por outro modelo, o Opus 5.5. E qualquer IA precisa de alguém que saiba pedir e conferir o resultado.
+
+Por onde começar: escolha uma tarefa repetitiva e teste só com ela, por uma semana, antes de mudar o resto.
+
+Manda para quem vive dizendo que vai testar IA e segue a @noxobr para ver IA aplicada sem exagero.
+
+Fonte: anúncio da Anthropic, 09/11/2026.
+
+#InteligenciaArtificial #Claude #Automacao #PequenasEmpresas #NOXO
