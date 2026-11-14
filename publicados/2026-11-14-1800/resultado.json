@@ -1,0 +1,21 @@
+{
+  "slot": "2026-11-14-1800",
+  "formato": "post",
+  "publicado_em": "2026-11-14T20:59:18.543Z",
+  "instagram": {
+    "id": "18135898237688835",
+    "permalink": "https://www.instagram.com/p/DfvHrmOmjbH/"
+  },
+  "facebook": {
+    "id": "1395830576945537_122110480287527685",
+    "permalink": "https://www.facebook.com/1395830576945537_122110480287527685"
+  },
+  "stories": {
+    "instagram": {
+      "erro": "17841436591232127/media_publish: The requested resource does not exist"
+    },
+    "facebook": {
+      "id": "2315404945917587"
+    }
+  }
+}
